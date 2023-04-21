@@ -1,10 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="layout :: header('Thành phố'+${city.name})">
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <h3 class="col" th:text="'Thành phố'+${city.name}"></h3>
+        <form action="/create" class="col" method="get">
+            <button class="btn border float-end" type="submit">Xem danh sách Thành phố</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row" th:text="'Tên:'+${city.name}"></div>
+    <div class="row" th:text="'Quốc gia:'+${city.nation.name}"></div>
+    <div class="row" th:text="'diện tích:'+${city.size}"></div>
+    <div class="row" th:text="'Dân số:'+${city.population}"></div>
+    <div class="row" th:text="'GDP:'+${city.GDP}"></div>
+    <div class="row" th:text="'Giới thiệu:'"></div>
+    <div class="row" th:text="${city.description}"></div>
+</div>
+<div class="container">
+    <div class="col float-end text-center">
+        <form>
+        <input formmethod="get" th:formaction="'edit/'+${city.id}" type="submit" value="Chỉnh sửa">
+        <input formmethod="get" th:formaction="'delete/'+${city.id}" type="submit" value="Xóa">
+        </form>
+    </div>
+</div>
+
 
 </body>
 </html>

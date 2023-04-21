@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: header(${city==null?'Create New City':('edit City '+city.id)})">
+<head th:replace="layout :: header(${city.name==null?'Thêm Thành phố':('Chỉnh sửa thành phố '+city.name)})">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <form action="/save" method="post" th:object="${city}">
     <div class="container">
-        <h3 class="col-8">Thêm thành phố</h3>
+        <h3 class="col-8" th:text="${city.name==null?'Thêm Thành phố':('Chỉnh sửa thành phố '+city.name)}"></h3>
         <input name="id" th:field="*{id}" th:type="hidden">
         <table class="table">
             <tr>
                 <td>Tên:</td>
                 <td><input th:field="*{name}" type="text"/></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
             </tr>
             <tr>
                 <td>Quốc gia:</td>
@@ -24,29 +25,32 @@
                         </th:block>
                     </select>
                 </td>
+                <td th:if="${#fields.hasErrors('nation')}" th:errors="*{nation}">Nation Error</td>
             </tr>
             <tr>
                 <td>Diện tích:</td>
-                <td><input th:field="*{size}" type="text"/></td>
+                <td><input th:field="*{size}" type="number"/></td>
+                <td th:if="${#fields.hasErrors('size')}" th:errors="*{size}">Size Error</td>
             </tr>
             <tr>
                 <td>Dân số:</td>
                 <td><input th:field="*{population}" type="number"/></td>
+                <td th:if="${#fields.hasErrors('population')}" th:errors="*{population}">Population Error</td>
             </tr>
             <tr>
                 <td>GDP:</td>
                 <td><input th:field="*{GDP}" type="number"/></td>
+                <td th:if="${#fields.hasErrors('GDP')}" th:errors="*{GDP}">GDP Error</td>
             </tr>
             <tr>
                 <td>Giới thiệu:</td>
-                <td><input th:field="*{description}" type="text"/></td>
+                <td><textarea th:field="*{description}"></textarea></td>
+                <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
             </tr>
         </table>
-        <div class="row">
-            <div class="col-2">
-                <input type="submit" value="Nhập thành phố">
-            </div>
-            <div class="col-2">
+        <div class="row justify-content-center text-center">
+            <div class="col">
+                <input type="submit" th:value="${city.name==null?'Nhập thành phố':('Cập nhật')}">
                 <input type="submit" formaction="/" formmethod="get" value="Thoát">
             </div>
         </div>

@@ -5,9 +5,9 @@
 <body>
 <div class="container">
     <div class="row">
-        <h3 class="col-8" >Danh sách thành phố</h3>
-        <form action="/create" method="get" class="col-4 float-right">
-            <button type="submit" class="btn border">Thêm thành phố</button>
+        <h3 class="col-8">Danh sách thành phố</h3>
+        <form action="/create" method="get" class="col-4">
+            <button type="submit" class="btn border float-end">Thêm thành phố</button>
         </form>
     </div>
     <table class="table">
@@ -22,9 +22,9 @@
         <tbody>
         <tr th:each="city:${list}">
             <th scope="row" th:text="${city.id}" ></th>
-            <td th:text="${city.nation}"></td>
-            <td th:text="${city.name}" th:href="/${city.id}"></td>
-            <td><a th:href="edit/${city.id}">Chỉnh sửa</a>|<a th:href="delete/${city.id}">Xóa</a></td>
+            <td><a th:text="${city.name}" th:href="'/'+${city.id}"></a></td>
+            <td th:text="${city.nation.name}"></td>
+            <td><a th:href="'edit/'+${city.id}">Chỉnh sửa</a>|<a th:href="'delete/'+${city.id}">Xóa</a></td>
         </tr>
         </tbody>
     </table>

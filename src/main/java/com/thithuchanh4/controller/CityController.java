@@ -6,6 +6,8 @@ import com.thithuchanh4.service.INationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,13 +51,16 @@ public class CityController {
         return modelAndView;
     }
     @PostMapping("save")
-    public String saveCity(@RequestBody City city){
+    public ModelAndView saveCity(@Validated City city, BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()) {
+            return new ModelAndView("save");
+        }
         cityService.save(city);
-        return "redirect:";
+        return new ModelAndView("redirect:");
     }
     @PostMapping("delete/{city}")
     public String deleteCity(@PathVariable City city){
         cityService.delete(city);
-        return "redirect:";
+        return "redirect:/";
     }
 }

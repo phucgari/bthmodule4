@@ -20,12 +20,12 @@ public class City {
         return id;
     }
     @Size(max = 20, message = "Tên quá dài")
+    @Size(min = 2, message = "Tên quá ngắn")
     private String name;
     @ManyToOne
-    @NotNull
+    @NotNull(message = "Phải chọn")
     @JoinColumn(name = "nation_id")
     private Nation nation;
-    @NotBlank
     @Min(value = 0,message = "diện tích số dương")
     private int size;
     @Min(value = 0,message = "dân số số dương")
@@ -33,7 +33,7 @@ public class City {
     @Min(value = 0,message = "GDP>0")
     private long GDP;
 
-    @Size(max = 20, message = "Mô tả quá ngắn")
+    @Size(min = 20, message = "Mô tả quá ngắn")
     private String description;
 
     public String getName() {
