@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: header(${city==null?'Create New City':('edit City '+city.id)})">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/save" method="post" th:object="${city}">
+    <div class="container">
+        <h3 class="col-8">Thêm thành phố</h3>
+        <input name="id" th:field="*{id}" th:type="hidden">
+        <table class="table">
+            <tr>
+                <td>Tên:</td>
+                <td><input th:field="*{name}" type="text"/></td>
+            </tr>
+            <tr>
+                <td>Quốc gia:</td>
+                <td>
+                    <select aria-label="Default select example" class="form-select" th:field="*{nation}">
+                        <option selected value="0">Select</option>
+                        <th:block th:each="nation:${nations}">
+                            <option th:text="${nation.name}" th:value="${nation.id}"></option>
+                        </th:block>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Diện tích:</td>
+                <td><input th:field="*{size}" type="text"/></td>
+            </tr>
+            <tr>
+                <td>Dân số:</td>
+                <td><input th:field="*{population}" type="number"/></td>
+            </tr>
+            <tr>
+                <td>GDP:</td>
+                <td><input th:field="*{GDP}" type="number"/></td>
+            </tr>
+            <tr>
+                <td>Giới thiệu:</td>
+                <td><input th:field="*{description}" type="text"/></td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-2">
+                <input type="submit" value="Nhập thành phố">
+            </div>
+            <div class="col-2">
+                <input type="submit" formaction="/" formmethod="get" value="Thoát">
+            </div>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
